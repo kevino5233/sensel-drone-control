@@ -55,7 +55,9 @@ class ARDrone(object):
         self.timer_t = 0.2
         self.com_watchdog_timer = threading.Timer(self.timer_t, self.commwdg)
         self.lock = threading.Lock()
-        self.speed = 0.2
+        self.v_x = 0.2
+        self.v_y = 0.2
+        self.v_h = 0.2
         self.at(at_config, "general:navdata_demo", "TRUE")
         self.video_pipe, video_pipe_other = multiprocessing.Pipe()
         self.nav_pipe, nav_pipe_other = multiprocessing.Pipe()
@@ -84,35 +86,35 @@ class ARDrone(object):
 
     def move_left(self):
         """Make the drone move left."""
-        self.at(at_pcmd, True, -self.speed, 0, 0, 0)
+        self.at(at_pcmd, True, -self.v_x, 0, 0, 0)
 
     def move_right(self):
         """Make the drone move right."""
-        self.at(at_pcmd, True, self.speed, 0, 0, 0)
+        self.at(at_pcmd, True, self.v_x, 0, 0, 0)
 
     def move_up(self):
         """Make the drone rise upwards."""
-        self.at(at_pcmd, True, 0, 0, self.speed, 0)
+        self.at(at_pcmd, True, 0, 0, self.v_h, 0)
 
     def move_down(self):
         """Make the drone decent downwards."""
-        self.at(at_pcmd, True, 0, 0, -self.speed, 0)
+        self.at(at_pcmd, True, 0, 0, -self.v_h, 0)
 
     def move_forward(self):
         """Make the drone move forward."""
-        self.at(at_pcmd, True, 0, -self.speed, 0, 0)
+        self.at(at_pcmd, True, 0, -self.v_y, 0, 0)
 
     def move_backward(self):
         """Make the drone move backwards."""
-        self.at(at_pcmd, True, 0, self.speed, 0, 0)
+        self.at(at_pcmd, True, 0, self.v_y, 0, 0)
 
     def turn_left(self):
         """Make the drone rotate left."""
-        self.at(at_pcmd, True, 0, 0, 0, -self.speed)
+        self.at(at_pcmd, True, 0, 0, 0, -self.v_x)
 
     def turn_right(self):
         """Make the drone rotate right."""
-        self.at(at_pcmd, True, 0, 0, 0, self.speed)
+        self.at(at_pcmd, True, 0, 0, 0, self.v_x)
 
     def reset(self):
         """Toggle the drone's emergency state."""
@@ -123,12 +125,19 @@ class ARDrone(object):
         """Flat trim the drone."""
         self.at(at_ftrim)
 
-    def set_speed(self, speed):
-        """Set the drone's speed.
+    def set_v_x(self, v_x):
+        """Set the drone's v_x.
 
         Valid values are floats from [0..1]
         """
-        self.speed = speed
+        self.v_x = v_x
+
+    def set_v_y(self, v_y):
+        """Set the drone's v_y.
+
+        Valid values are floats from [0..1]
+        """
+        self.v_y = v_y
 
     def at(self, cmd, *args, **kwargs):
         """Wrapper for the low level at commands.

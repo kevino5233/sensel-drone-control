@@ -1,64 +1,13 @@
-<a href="https://flattr.com/submit/auto?user_id=venthur&url=http%3A%2F%2Fgithub.com%2Fventhur%2Fpython-ardrone" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
+HackTX 2015 submission. Controls a drone using Sensel, a pressure sensitive device.
 
-Getting Started:
-----------------
+Required hardware:
+Parrot AR Drone 2.0
+Sensel Morph
 
-```python
->>> import libardrone
->>> drone = libardrone.ARDrone()
->>> # You might need to call drone.reset() before taking off if the drone is in
->>> # emergency mode
->>> drone.takeoff()
->>> drone.land()
->>> drone.halt()
-```
+Required software:
+Python 2.7
+pySerial
 
-The drone's property `image` contains always the latest image from the camera.
-The drone's property `navdata` contains always the latest navdata.
-
-
-Demo:
------
-
-There is also a demo application included which shows the video from the drone
-and lets you remote-control the drone with the keyboard:
-
-    RETURN      - takeoff
-    SPACE       - land
-    BACKSPACE   - reset (from emergency)
-    a/d         - left/right
-    w/s         - forward/back
-    1,2,...,0   - speed
-    UP/DOWN     - altitude
-    LEFT/RIGHT  - turn left/right
-
-Here is a [video] of the library in action:
-
-  [video]: http://youtu.be/2HEV37GbUow
-
-Repository:
------------
-
-The public repository is located here:
-
-  git://github.com/venthur/python-ardrone.git
-
-
-Requirements:
--------------
-
-This software was tested with the following setup:
-
-  * Python 2.6.6
-  * Psyco 1.6 (recommended)
-  * Pygame 1.8.1 (only for the demo)
-  * Unmodified AR.Drone firmware 1.5.1
-
-
-License:
---------
-
-This software is published under the terms of the MIT License:
-
-  http://www.opensource.org/licenses/mit-license.php
-
+Instructions:
+Planar movement is similar to a joy stick. Your first touch will act as the center. From there, you can move your finger around that center and it will move in that direction. Keep in mind the drone can only move in one direction at a time and will choose the direction with the highest magnitude.
+Holding a single finger in the same spot for 2 seconds will make the drone go up. Holding two fingers in the same spot for 2 seconds will make the drone go down.
