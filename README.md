@@ -12,4 +12,4 @@ Instructions:
 Planar movement is similar to a joy stick. Your first touch will act as the center. From there, you can move your finger around that center and it will move in that direction. Keep in mind the drone can only move in one direction at a time and will choose the direction with the highest magnitude.
 Holding a single finger in the same spot for 2 seconds will make the drone go up. Holding two fingers in the same spot for 2 seconds will make the drone go down.
 
-sensel.com/developers
+<http://www.sensel.com/developers>
